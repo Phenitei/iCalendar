@@ -1,0 +1,21 @@
+name: Haskell CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup Stack
+      uses: mstksg/setup-stack@v1
+    - name: Compile
+      run: |
+        stack build --fast
+    - name: Test
+      run: |
+        stack test --fast
+    - name: Haskell Linter
+      uses: domdere/haskell-lint-action@v1.0.2
